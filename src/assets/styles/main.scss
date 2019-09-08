@@ -1,0 +1,22 @@
+@import '@/assets/styles/variables';
+
+@font-face {
+  font-family: Museo Sans Cyrl;
+  src: url('~@/assets/fonts/MuseoSansCyrl-500.ttf');
+  font-weight: 500;
+}
+
+@font-face {
+  font-family: Museo Sans Cyrl;
+  src: url('~@/assets/fonts/MuseoSansCyrl-900.ttf');
+  font-weight: 900;
+}
+
+* {
+  line-height: 1;
+}
+
+.delimeter {
+  width: 1px;
+  background-color: $darkGray;
+}
