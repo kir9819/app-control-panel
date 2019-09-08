@@ -7,12 +7,19 @@
 <script>
 import appBody from '@/components/appBody'
 
-import { mapActions, mapState } from 'vuex'
+import { mapActions, mapState, mapMutations } from 'vuex'
+import types from '@/store/mutationTypes'
 
 export default {
   name: 'home',
-  created () {
-    this.init()
+  async created () {
+    await this.init()
+
+    const routeType = this.$route.query.t
+
+    if (routeType && this.desktops.indexOf(routeType) !== -1) {
+      this[types.CHANGE_CURRENT_DESKTOP](routeType)
+    }
   },
   computed: {
     ...mapState({
@@ -22,7 +29,10 @@ export default {
   methods: {
     ...mapActions({
       init: 'init'
-    })
+    }),
+    ...mapMutations([
+      types.CHANGE_CURRENT_DESKTOP
+    ])
   },
   components: {
     appBody,

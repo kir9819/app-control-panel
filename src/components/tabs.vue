@@ -37,6 +37,7 @@ export default {
       types.CHANGE_CURRENT_DESKTOP
     ]),
     changeCurrentTab (name) {
+      this.$router.push({ name: 'home', query: { t: name } })
       this[types.CHANGE_CURRENT_DESKTOP](name)
     }
   },

@@ -1,4 +1,5 @@
 import types from './mutationTypes'
+import { saveInLocalStorage } from './index'
 
 export const platformTypes = {
   all: 'all',
@@ -18,6 +19,7 @@ export default {
   namespaced: true,
   state: () => ({
     name: '',
+    idName: '',
     applications: [],
     platform: platformTypes.all,
     rating: ratingTypes.none
@@ -35,12 +37,27 @@ export default {
       state.name = name
     },
     [types.SET_PLATFORM] (state, platform) {
-      if (!platformTypes[platform]) throw new Error(`platform "${platform}" is unknown`)
+      if (!platformTypes[platform]) {
+        state.platform = platformTypes.all
+        saveInLocalStorage(state.idName, 'platform', state.platform)
+        throw new Error(`platform "${platform}" is unknown`)
+      }
+
       state.platform = platform
+      saveInLocalStorage(state.idName, 'platform', state.platform)
     },
     [types.SET_RATING] (state, rating) {
-      if (!ratingTypes[rating]) throw new Error(`rating "${rating}" is unknown`)
+      if (!ratingTypes[rating]) {
+        state.rating = ratingTypes.none
+        saveInLocalStorage(state.idName, 'rating', state.rating)
+        throw new Error(`rating "${rating}" is unknown`)
+      }
+
       state.rating = rating
+      saveInLocalStorage(state.idName, 'rating', state.rating)
+    },
+    [types.SET_ID_NAME] (state, idName) {
+      state.idName = idName
     }
   }
 }
