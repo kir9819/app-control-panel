@@ -9,13 +9,8 @@
     </tab-block>
 
     <tab-block title="Рейтинг">
-      <!-- <select>
-        <option>Выбрать</option>
-        <option>от 4,0 </option>
-        <option>от 3,0 </option>
-        <option>от 2,0 </option>
-      </select> -->
       <app-select
+        :key="currentDesktop"
         placeholder="Выбрать"
         :selected="rating"
         @updateOption="changeRating"
@@ -90,7 +85,7 @@ export default {
     },
     rating: {
       get () {
-        return this.desktop.rating
+        return this.options.find(opt => opt.value === this.desktop.rating)
       },
       set (v) {
         return this.setRating(v)
